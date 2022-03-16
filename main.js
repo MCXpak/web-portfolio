@@ -133,7 +133,7 @@ addTreeTrunk();
 addLeafs();
 
 const loader = new GLTFLoader();
-loader.load( './low_poly_fireplace.glb', function ( gltf ) {
+loader.load( './low_poly_fireplace.glb', function (gltf) {
 	gltf.scene.position.set(3,1.55,6.5)
 	scene.add( gltf.scene );
 }, undefined, function ( error ) {
