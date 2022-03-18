@@ -14,7 +14,7 @@ const scene = new THREE.Scene();
 	const near = 1;
 	const far = 50;
 	//const color = 'lightblue';
-	scene.fog = new THREE.Fog(0x3DFAFF, near, far);
+	//scene.fog = new THREE.Fog(0x3DFAFF, near, far);
 	//scene.background = new THREE.Color(color);
 }
 //Camera
@@ -132,15 +132,48 @@ addDirtBlocks();
 addTreeTrunk();
 addLeafs();
 
+function randXYZ(amount){
+	
+}
 const loader = new GLTFLoader();
-loader.load( '/low_poly_fireplace.glb', function (gltf) {
+loader.load( './low_poly_fireplace.glb', function (gltf) {
 	gltf.scene.position.set(3,1.55,6.5)
 	scene.add( gltf.scene );
 }, undefined, function ( error ) {
 	console.error( error );
 } );
 
+function loadCloud1(){
+	loader.load('./cloud1.glb', function (cloud1) {
+		const [x,y,z] = Array(3).fill().map(() => THREE.MathUtils.randFloatSpread(-300,300))
+		cloud1.scene.position.set(x,y,z)
+		scene.add( cloud1.scene );
 
+	})
+}
+loader.load('./cloud1.glb', function (cloud1) {
+	const [x,y,z] = Array(3).fill().map(() => THREE.MathUtils.randFloatSpread(300))
+	cloud1.scene.position.set(x,y,z);
+	cloud1.scene.rotation.x = x;
+	cloud1.scene.rotation.y = y;
+	cloud1.scene.rotation.z = z;
+	scene.add( cloud1.scene );
+})
+loader.load('./cloud3.glb', function (cloud2) {
+
+	const [x,y,z] = Array(3).fill().map(() => THREE.MathUtils.randFloatSpread(300))
+	cloud2.scene.position.set(x,y,z)
+	scene.add( cloud2.scene );
+
+})
+loader.load('./cloud3.glb', function (cloud3) {
+	const [x,y,z] = Array(3).fill().map(() => THREE.MathUtils.randFloatSpread(300))
+	cloud3.scene.position.set(x,y,z)
+	scene.add( cloud3.scene );
+
+})
+
+Array(200).fill().forEach(loadCloud1);
 
 
 /*
